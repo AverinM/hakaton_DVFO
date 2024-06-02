@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример сайта</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="sidebar">
+        <div>
+            <div class="logo">
+                <img src="logo.png" alt="Логотип">
+            </div>
+            <a href="index.html" id="link1">
+                <span class="icon">🏠</span> Название очень длинное
+            </a>
+            <a href="page2.html" id="link2">
+                <span class="icon">📍</span> Полигоны
+            </a>
+            <a href="page3.html" id="link3" class="active">
+                <span class="icon">🚗</span> Транспортные средства
+            </a>
+        </div>
+        <a href="login.html" class="login">
+            <span class="icon">🔓</span> Выход
+        </a>
+    </nav>
+    <div class="divider" id="divider"></div>
+    <main>
+        <button id="toggleMenu">☰</button>
+        <h1>Название очень длинное</h1>
+        <p>Содержание страницы.</p>
+    </main>
+
+    <script>
+        const toggleMenuButton = document.getElementById('toggleMenu');
+        const sidebar = document.getElementById('sidebar');
+        const divider = document.getElementById('divider');
+
+        toggleMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            divider.classList.toggle('collapsed');
+        });
+
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        // Fade-in effect only if navigated from login
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('fromLogin')) {
+            document.body.classList.add('fade-in');
+        }
+    </script>
+</body>
+</html>
